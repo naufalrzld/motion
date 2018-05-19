@@ -1,5 +1,4 @@
 <?php
-	//header('Content-Type: application/json');
 	require_once dirname(__FILE__) . '/Functions.php';
 	$fun = new Functions();
 
@@ -11,20 +10,18 @@
 		$kelas = $_POST["kelas"];
 		$jurusan = $_POST["jurusan"];
 
-		$mahasiswa = $fun->inputData($nim, $nama, $kelas, $jurusan);
+		$update = $fun->updateDataMahasiswa($nim, $nama, $kelas, $jurusan);
 
-		if ($mahasiswa) {
-			$response["msg"] = "Input data berhasil";
-			
-			echo json_encode($response);
+		if ($update) {
+			$response["msg"] = "Update data berhasil";
 		} else {
 			$response["error"] = TRUE;
-			$response["msg"] = "Input data gagal";
-			echo json_encode($response);
+			$response["msg"] = "Update data gagal";
 		}
 	} else {
 		$response["error"] = TRUE;
 		$response["msg"] = "Parameter kosong!";
-		echo json_encode($response);
 	}
+
+	echo json_encode($response);
 ?>
